@@ -1,0 +1,29 @@
+{
+  "name": "@victordotdevelop/mailer-hub",
+  "version": "1.0.0",
+  "description": "A naive mailing lib with multiple email service providers integrated.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc",
+    "lint": "./node_modules/.bin/tslint lib/**/*.ts",
+    "prepublish": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victor-develop/mailer-hub.git"
+  },
+  "author": "Victor Zhou <victor.develop@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/victor-develop/mailer-hub/issues"
+  },
+  "homepage": "https://github.com/victor-develop/mailer-hub#readme",
+  "devDependencies": {
+    "@types/node": "^9.4.4",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb-base": "^0.1.0",
+    "typescript": "^2.7.1"
+  }
+}
