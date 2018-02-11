@@ -3,7 +3,7 @@ import * as MailGun from 'mailgun-js';
 
 export function build(config: IMailGunConfig): IMailer {
 
-  const mailGun = MailGun({ apikey: config.apikey, domain: config.domain });
+  const mailGun = MailGun({ apikey: config.apiKey, domain: config.domain });
 
   const sender = `${config.senderAcc}@${config.domain}`;
 

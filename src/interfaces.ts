@@ -22,7 +22,7 @@ export interface IHubMail {
 }
 
 export interface IMailGunConfig {
-  apikey: string;
+  apiKey: string;
   domain: string;
   senderAcc: string;
 }
