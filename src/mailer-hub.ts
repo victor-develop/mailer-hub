@@ -1,27 +1,45 @@
-import { IMailerHub, IMailer, IHubMail, IMailGunConfig, ISendGridConfig } from './interfaces';
+import { IMailerHub, IMailer, IHubMail, IMailGunConfig, ISendGridConfig, requiredMailAttr } from './interfaces';
 import * as mailgun from './mailers/mailgun';
 import * as sendgrid from './mailers/sendgrid';
-import { AllMailerFailError } from './errors';
+import { AllMailerFailError, IncompleteMailError, BadMailError } from './errors';
 
 
 export type sendOnceFunc = (mailers: IMailerHub[]) =>
   (ith: number, mail: IHubMail) => Promise<any>;
 
-export const sendOnce:sendOnceFunc = mailers =>
-  (ith, mail) =>
-      mailers[ith].send(mail)
-        .catch((err) => {
-          if (ith !== mailers.length) {
-            return sendOnce(mailers)(ith + 1, mail);
-          }
-          return Promise.reject(new AllMailerFailError());
-        });
+export const validateMailRequirement = (mail: IHubMail): Promise<any> => {
+  const hasRequired = requiredMailAttr.map(attr => attr in mail)
+    .filter(res => res !== true)
+    .length === 0;
+  if (!hasRequired) {
+    return Promise.reject(new IncompleteMailError());
+  }
+  return Promise.resolve(true);
+};
 
+export const sendOnce:sendOnceFunc = mailers =>
+  (ith, mail) => {
+    if (ith < 0 || ith > mailers.length) {
+      return Promise.reject(new Error('index argument out of bound'));
+    }
+    if (ith === mailers.length) {
+      return Promise.reject(new AllMailerFailError());
+    }
+    return mailers[ith].send(mail)
+      .catch((err) => {
+        if (err instanceof BadMailError) {
+          throw err;
+        }
+        // else, failover to another service
+        return sendOnce(mailers)(ith + 1, mail);
+      });
+  };
 
 const buildMailerHub = (mailers: IMailerHub[]) => {
 
   const hub: IMailerHub = {
-    send: (mail: IHubMail) => sendOnce(mailers)(0, mail),
+    send: (mail: IHubMail) => validateMailRequirement(mail)
+      .then(() => sendOnce(mailers)(0, mail)),
   };
 
   return hub;
