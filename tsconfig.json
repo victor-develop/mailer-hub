@@ -4,13 +4,13 @@
     "module": "commonjs",
     "declaration": true,
     "outDir": "./dist",
-    "strict": false,
-    "sourceMap": false
+    "strict": false
   },
   "include": [
     "./src/**/*"
   ],
   "exclude": [
-    "./src/**/*.secret.ts"
+    "./src/**/*.secret.ts",
+    "./src/kk.ts"
   ]
 }

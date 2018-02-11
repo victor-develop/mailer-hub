@@ -5,9 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run rm-tests",
     "lint": "tslint 'src/**/*.ts'",
-    "prepublish": "npm run build",
+    "rm-tests": "rm -rf 'dist/tests'",
+    "prepublish": "npm run build && npm run rm-tests",
     "test": "mocha --require ts-node/register 'src/**/*.spec.ts'",
     "test build": "./node_modules/mocha/bin/mocha 'dist/**/*.spec.js'"
   },
