@@ -1,5 +1,5 @@
 {
-  "name": "@victordotdevelop/mailer-hub",
+  "name": "vicdotdev-mailer-hub",
   "version": "0.1.0",
   "description": "A naive mailing lib with multiple email service providers integrated.",
   "main": "dist/index.js",
