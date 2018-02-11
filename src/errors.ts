@@ -18,6 +18,6 @@ export class IncompleteMailError extends BadMailError {
 
 export class AllMailerFailError extends SendMailError {
   constructor(cause = null) {
-    super('Somehing wrong with the email. Check the email addresses you provided.', cause);
+    super('All email services failed to send this email', cause);
   }
 }
