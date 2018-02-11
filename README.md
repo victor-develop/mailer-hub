@@ -14,8 +14,10 @@ Currently MailGun and SendGrid are supported, more email services might be added
  - set up mailer hub with your own api keys (you can sign up at MailGun and SendGrid's site)
  - then try to send an email
   ```javascript
-      import { makeMailerHubBuilder, ErrorTypes } from 'vicdotdev-mailer-hub';
-
+      const mailerHubLib = require('vicdotdev-mailer-hub');
+      const makeMailerHubBuilder = mailerHubLib.makeMailerHubBuilder;
+      const ErrorTypes = mailerHubLib.ErrorTypes;
+      
       // set up mailers, i.e. email service provider
       const builder = makeMailerHubBuilder();
       const mailHub = builder
