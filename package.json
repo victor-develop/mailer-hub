@@ -5,10 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "./node_modules/.bin/tsc",
-    "lint": "./node_modules/.bin/tslint 'src/**/*.ts'",
+    "build": "tsc",
+    "lint": "tslint 'src/**/*.ts'",
     "prepublish": "npm run build",
-    "test": "./node_modules/mocha/bin/mocha --require ts-node/register 'src/**/*.spec.ts'",
+    "test": "mocha --require ts-node/register 'src/**/*.spec.ts'",
     "test build": "./node_modules/mocha/bin/mocha 'dist/**/*.spec.js'"
   },
   "repository": {

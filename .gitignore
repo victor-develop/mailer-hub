@@ -60,3 +60,7 @@ typings/
 # built artifacts
 dist
 
+# sensitive information in ts files
+*.secret.ts
+
+
