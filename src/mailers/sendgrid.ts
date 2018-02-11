@@ -1,5 +1,6 @@
 import * as sendGrid from '@sendgrid/mail';
 import { IMailer, IHubMail, ISendGridConfig, sendMail } from '../interfaces';
+import { BadMailError } from '../errors';
 
 
 export function build(config: ISendGridConfig): IMailer {
@@ -14,7 +15,10 @@ export function build(config: ISendGridConfig): IMailer {
       subject: mail.subject,
       text: mail.text,
     };
-    return sendGrid.send(data);
+    return sendGrid.send(data)
+      .catch((err) => {
+        return Promise.reject(err);
+      });
   });
   return mailer;
 }
