@@ -56,4 +56,4 @@ export class MailerHubBuilder {
 
 }
 
-export const mailerHubBuilder = new MailerHubBuilder(buildMailerHub);
+export const makeMailerHubBuilder = () => new MailerHubBuilder(buildMailerHub);
