@@ -17,7 +17,7 @@ Currently MailGun and SendGrid are supported, more email services might be added
       const mailerHubLib = require('vicdotdev-mailer-hub');
       const makeMailerHubBuilder = mailerHubLib.makeMailerHubBuilder;
       const ErrorTypes = mailerHubLib.ErrorTypes;
-      
+
       // set up mailers, i.e. email service provider
       const builder = makeMailerHubBuilder();
       const mailHub = builder
@@ -40,6 +40,9 @@ Currently MailGun and SendGrid are supported, more email services might be added
           bcc: 'someonebcc@example.org',
           subject: 'Sample code: how to send email with this package',
           text: `And more information in paragrahs`,
+      })
+      .them(() => {
+        console.log('email was sent sucessfully');
       })
       .catch((err) => {
         if (err instanceof ErrorTypes.IncompleteMailError) {
@@ -78,6 +81,10 @@ __Caution__: If you are using MailGun's sandbox domain, running these tests will
 ```sh
   npm run build
 ```
+
+## TODOs
+ - Validate credentials of different email service providers
+ - Logging and detailed error messages
 
 ## Acknowledgements
 
