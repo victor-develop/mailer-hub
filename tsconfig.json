@@ -5,7 +5,7 @@
     "declaration": true,
     "outDir": "./dist",
     "strict": false,
-    "sourceMap": true
+    "sourceMap": false
   },
   "include": [
     "./src/**/*"
