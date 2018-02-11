@@ -1,6 +1,6 @@
 {
   "name": "@victordotdevelop/mailer-hub",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A naive mailing lib with multiple email service providers integrated.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,8 @@
     "build": "./node_modules/.bin/tsc",
     "lint": "./node_modules/.bin/tslint 'src/**/*.ts'",
     "prepublish": "npm run build",
-    "test": "./node_modules/mocha/bin/mocha --require ts-node/register 'src/**/*.spec.ts'"
+    "test": "./node_modules/mocha/bin/mocha --require ts-node/register 'src/**/*.spec.ts'",
+    "test build": "./node_modules/mocha/bin/mocha 'dist/**/*.spec.js'"
   },
   "repository": {
     "type": "git",
