@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
+    "email-validator": "^1.1.1",
     "mailgun-js": "^0.14.2",
     "make-error-cause": "^1.2.2"
   }

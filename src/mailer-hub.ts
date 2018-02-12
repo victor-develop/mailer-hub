@@ -1,20 +1,51 @@
-import { IMailerHub, IMailer, IHubMail, IMailGunConfig, ISendGridConfig, requiredMailAttr } from './interfaces';
+import { IMailerHub, IMailer, IHubMail, IMailGunConfig, ISendGridConfig, requiredMailAttr, MailReceipients } from './interfaces';
 import * as mailgun from './mailers/mailgun';
 import * as sendgrid from './mailers/sendgrid';
 import { AllMailerFailError, IncompleteMailError, BadMailError } from './errors';
+import * as EmailValidator from 'email-validator';
 
 
 export type sendOnceFunc = (mailers: IMailerHub[]) =>
   (ith: number, mail: IHubMail) => Promise<any>;
 
-export const validateMailRequirement = (mail: IHubMail): Promise<any> => {
-  const hasRequired = requiredMailAttr.map(attr => attr in mail)
-    .filter(res => res !== true)
+
+export const validateRecipients = (mails: MailReceipients) => {
+  if (mails instanceof Array) {
+    // all must be valid
+    return mails.map(EmailValidator.validate)
+    .filter(valid => valid !== true)
     .length === 0;
-  if (!hasRequired) {
-    return Promise.reject(new IncompleteMailError());
   }
-  return Promise.resolve(true);
+  return EmailValidator.validate(mails);
+};
+
+
+export const validateMailRequirement = (mail: IHubMail): Promise<any> => {
+
+  try {
+    const hasRequired = requiredMailAttr
+      .filter(attr => attr in mail)
+      .length === requiredMailAttr.length;
+    if (!hasRequired) {
+      return Promise.reject(new IncompleteMailError());
+    }
+
+    let valid = validateRecipients(mail.to);
+    if (mail.cc !== undefined && mail.cc !== '') {
+      valid = valid && validateRecipients(mail.cc);
+    }
+    if (mail.bcc !== undefined && mail.bcc !== '') {
+      valid = valid && validateRecipients(mail.bcc);
+    }
+
+    if (!valid) {
+      return Promise.reject(new BadMailError());
+    }
+    return Promise.resolve();
+
+  } catch (err) {
+    return Promise.reject(new BadMailError());
+  }
 };
 
 export const sendOnce:sendOnceFunc = mailers =>
