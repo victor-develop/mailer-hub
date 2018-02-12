@@ -122,8 +122,9 @@ Below shows the major components in this package.
  - __sendOnce__: a core function responsible for sending ONE successful email among many email servicer providers(they are called __mailers__ in code). This function plays the logic of __fail over__.
 
 ## TODOs
- - Validate credentials of different email service providers
- - Logging and detailed error messages
+ - Validate credentials of different email service providers upon the creation of 
+ - Log each time of send email and how many services were tried. Expose the log for pakcage users to retrive. E.g. via events;
+ 
 
 ## Acknowledgements
 
