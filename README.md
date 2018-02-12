@@ -9,7 +9,7 @@ Currently MailGun and SendGrid are supported, more email services might be added
 
  - install the package
   ```sh
-    npm install --save @victordotdevelop/mailer-hub
+    npm install --save vicdotdev-mailer-hub
   ```
  - set up mailer hub with your own api keys (you can sign up at MailGun and SendGrid's site)
  - then try to send an email
