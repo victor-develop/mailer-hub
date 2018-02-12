@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/victor-develop/mailer-hub#readme",
   "engines": {
-    "node": "8.1.x"
+    "node": ">=8.1.x"
   },
   "devDependencies": {
     "@types/chai": "^4.1.2",

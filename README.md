@@ -41,7 +41,7 @@ Currently MailGun and SendGrid are supported, more email services might be added
           subject: 'Sample code: how to send email with this package',
           text: `And more information in paragrahs`,
       })
-      .them(() => {
+      .then(() => {
         console.log('email was sent sucessfully');
       })
       .catch((err) => {
