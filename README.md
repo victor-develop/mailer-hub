@@ -81,6 +81,45 @@ __Caution__: If you are using MailGun's sandbox domain, running these tests will
 ```sh
   npm run build
 ```
+### Directory Structure
+
+Below shows a glance of the source code folder
+
+```sh
+  src                                       
+  ├── errors.ts                               # publicly exposed error types
+  ├── index.ts                                # lib entrance
+  ├── interfaces.ts                           # interfaces (data model)
+  ├── mailer-hub.ts                           # main component, the abstraction layer of multiple email services
+  ├── mailers                                 # specific email service providers
+  │   ├── mailgun.ts
+  │   └── sendgrid.ts
+  └── tests                                   # test files and data
+      ├── data
+      │   ├── emails.ts
+      │   └── secret
+      │       ├── mailgun.secret.exmaple.ts
+      │       ├── mailgun.secret.ts           # this is not committed to git repo. you have to fill in your own.
+      │       ├── sendgrid.secret.example.ts
+      │       └── sendgrid.secret.ts          # this is not committed to git repo. you have to fill in your own.
+      ├── index.spec.ts
+      ├── mailer-hub.spec.ts
+      ├── mailers
+      │   ├── mailgun.spec.ts
+      │   └── sendgrid.spec.ts
+      └── send-mail.spec.ts
+```
+
+### Major Components
+
+Below shows the major components in this package.
+
+![major components](./docs/major-components.png)
+
+ - __IMailerHub__: This is the object to be used by other parties to send an email
+ - __MailerHubBuilder__: Users are supposed to input their configuration of different email service provider(i.e. ___mailer__) and build a __IMailerHub__ object
+ - __IMailer__: one __IMailer__ represents exatly one specific email service provider.
+ - __sendOnce__: a core function responsible for sending ONE successful email among many email servicer providers(they are called __mailers__ in code) 
 
 ## TODOs
  - Validate credentials of different email service providers
