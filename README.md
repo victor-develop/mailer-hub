@@ -114,12 +114,12 @@ Below shows a glance of the source code folder
 
 Below shows the major components in this package.
 
-![major components](./docs/major-components.png)
+![major components](./doc/major-components.png)
 
  - __IMailerHub__: This is the object to be used by other parties to send an email
  - __MailerHubBuilder__: Users are supposed to input their configuration of different email service provider(i.e. ___mailer__) and build a __IMailerHub__ object
  - __IMailer__: one __IMailer__ represents exatly one specific email service provider.
- - __sendOnce__: a core function responsible for sending ONE successful email among many email servicer providers(they are called __mailers__ in code) 
+ - __sendOnce__: a core function responsible for sending ONE successful email among many email servicer providers(they are called __mailers__ in code). This function plays the logic of __fail over__.
 
 ## TODOs
  - Validate credentials of different email service providers
